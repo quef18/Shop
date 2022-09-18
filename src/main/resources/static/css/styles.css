@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    padding: 0 50px;
+    height: 106px;
+    width: 100%;
+    background-color: rgb(98, 100, 100);
+    z-index: 10;
+}
+
+.sub_header {
+    height: 106px;
+}
+
+#header .logo {
+    flex-grow: 1;
+}
+
+#header .logo img {
+    width: 200px;
+}
+
+#header .action {
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+}
+
+#header .action img {
+    width: 24px;
+}
+
+#header .action .search_box {
+    margin-right: 5px;
+    padding: 0 20px;
+    display: flex;
+    background-color: #dbd7d7;
+    border-radius: 35px;
+}
+
+#header .action .search_box a {
+    display: flex;
+}
+
+#header .action .search_box input {
+    border: none;
+    outline: none;
+    background-color: #dbd7d7;
+}
+
+#header .action .account {
+    padding: 5px;
+}
+
+#header .action .cart {
+    padding: 5px;
+}
+
+
+#header .menu .list {
+    list-style: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    align-content: center;
+}
+
+#header .menu .list li {
+    display: inline-block;
+}
+
+#header .menu .list li a {
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#slider {
+    height: 1300px;
+    background-image: url(/static/img/somitayngan_12f87a86be724f41b29c34785402987b.jpg) ;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+#footer {
+    height: auto;
+    background-color: #dbd7d7;
+    display: flex;
+    justify-content: center;
+}
+
+#footer img {
+    margin: 10px;
+    width: 28px;
+}
+
+#footer h2 {
+    padding-left: 10px;
+}
+
+#footer .contact {
+}

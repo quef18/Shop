@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/product_detail.css">
+    <title>Shop</title>
+</head>
+<body>
+<div id="header">
+    <div class="logo">
+        <a th:href="@{/}">
+            <img src="" alt="">
+        </a>
+    </div>
+
+    <div class="menu">
+        <ul class="list">
+            <li th:each="i : ${category}"><a th:href="@{'/category/' + ${i.getId()} + '/products?page=0'}" th:text="${i.getName()}"></a></li>
+        </ul>
+    </div>
+
+    <div class="action">
+        <div class="search_box">
+            <input type="text" placeholder="Search...">
+            <a href="#">
+                <img src="/icons/search.svg" alt="">
+            </a>
+        </div>
+        <div class="account">
+            <a th:href="@{/login}">
+                <img src="/icons/account.svg" alt="">
+            </a>
+        </div>
+        <div class="cart">
+            <a th:href="@{/cart/view}">
+                <img src="/icons/shopping_cart.svg" alt="">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="sub_header"></div>
+<div id="content" th:action="@{/cart/update}" method="post">
+    <div class="cart_left">
+        <h1>Giỏ hàng của bạn</h1>
+        <div class="cart_container">
+            <h3>Bạn đang có <span th:text="${count}">2</span> sản phẩm trong giỏ hàng</h3>
+            <div class="item" th:each="i: ${cartItem}">
+                <div class="item_img item">
+                    <img th:src="${i.getProduct().getImg()}" alt="">
+                </div>
+                <div class="item_info">
+                    <h3 th:text="${i.getProduct().getName()}"></h3>
+                    <h5>XL/Đen</h5>
+                </div>
+                <div class="item_quantity">
+                    <div class="input-group">
+                        <input type="button" value="-" class="button-minus" data-field="quantity">
+                        <input type="number" step="1" max="" value="1" name="quantity" class="quantity-field">
+                        <input type="button" value="+" class="button-plus" data-field="quantity">
+                    </div>
+                </div>
+                <div class="item_price">
+                    <h3 th:text="${i.getProduct().getPrice()}"></h3>
+                </div>
+                <div class="item_total-price">
+                    <h3>Thành tiền</h3>
+                    <span th:text="${i.getProduct().getPriceDouble()*i.getQuantity()} + 00đ">250.000đ</span>
+                    <div class="img_remove">
+                        <a th:href="@{/cart/remove/{productId}(productId=${i.getProduct().getId()})}">
+                            <img src="/icons/delete.svg" alt="abc">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart_right">
+        <a th:href="@{/}">Tiếp tục mua hàng
+            <span>&#8594;</span>
+        </a>
+        <div class="order_box">
+            <h3>Thông tin đơn hàng</h3>
+            <p>
+                Tổng tiền:
+                <span th:text=" ${totalPrice}">250.000đ</span>
+            </p>
+            <a th:href="@{/checkout}" th:if="${cartItem.size() != 0}">
+                <button>Thanh toán</button>
+            </a>
+            <a href="#" th:if="${cartItem.size() == 0}">
+                <button>Thanh toán</button>
+            </a>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="container text-left text-md-left">
+        <div class="row text-left text-md-left">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-black">Products</h5>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Help Center</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Contact Us</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Product Help</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Warranty</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Order Status</a>
+                </p>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-black">Provides</h5>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Help Center</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Contact Us</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Product Help</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Warranty</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Order Status</a>
+                </p>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-black">support</h5>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Help Center</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Contact Us</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Product Help</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Warranty</a>
+                </p>
+                <p>
+                    <a href="#" class="text-black" style="text-decoration: none;">Order Status</a>
+                </p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-black">Contact</h5>
+                <p>
+                    <img src="/icons/home.svg" alt="">
+                    Số nhà 123 - Hà Đông - Hà Nội
+                </p>
+                <p>
+                    <img src="/icons/phone.svg" alt="">
+                    Hotline: 0123456789
+                </p>
+                <p>
+                    <img src="/icons/email.svg" alt="">
+                    Mail: thang@gmail.com
+                </p>
+                <div class="contact">
+                    <img src="/icons/facebook.svg" alt="">
+                    <img src="/icons/instagram.svg" alt="">
+                    <img src="/icons/tiktok.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function incrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+        if (!isNaN(currentVal)) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+        } else {
+            parent.find('input[name=' + fieldName + ']').val(0);
+        }
+    }
+
+    function decrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+        if (!isNaN(currentVal) && currentVal > 0) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+        } else {
+            parent.find('input[name=' + fieldName + ']').val(0);
+        }
+    }
+
+    $('.input-group').on('click', '.button-plus', function(e) {
+        incrementValue(e);
+    });
+
+    $('.input-group').on('click', '.button-minus', function(e) {
+        decrementValue(e);
+    });
+
+</script>
+</body>
+</html>

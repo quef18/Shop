@@ -1,0 +1,128 @@
+a {
+    text-decoration: none;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.cart_left h1 {
+    padding: 20px;
+    text-align: center;
+}
+
+.cart_container h3 {
+    padding: 10px;
+}
+
+.cart_left .cart_container .item_info h3 {
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.cart_left .cart_container .item_info h5 {
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.cart_left .cart_container .item_info {
+    display: flex;
+    flex-grow: 5;
+}
+
+.cart_left .cart_container .item_price h3 {
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.cart_left .cart_container .item_total-price h3{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.cart_left .cart_container .item_total-price span{
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.cart_container .item {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(236, 236, 236);
+}
+
+.cart_container .item img {
+    width: 100px;
+}
+
+.item_img , .item_info, .item_price, .item_total-price {
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.item_quantity {
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+}
+
+.item_quantity button {
+    width: 25px;
+    height: 25px;
+}
+
+.item_quantity input {
+    width: 35px;
+    height: 25px;
+}
+
+.item_total-price .img_remove img {
+    width: 24px;
+}
+
+.cart_right {
+    margin-top: 77px;
+    margin-left: 100px;
+}
+
+.cart_right a {
+    display: block;
+    padding: 10px;
+}
+
+.cart_right .order_box {
+    border: 1px solid rgb(196, 195, 195);
+    width: 330px;
+}
+
+.cart_right .order_box h3 {
+    padding: 20px;
+    border-bottom: 1px solid rgb(196, 195, 195);
+    font-size: 30px;
+}
+
+.cart_right .order_box p {
+    padding: 20px;
+    border-bottom: 1px solid rgb(196, 195, 195);
+}
+
+.cart_right .order_box button {
+    margin: 20px;
+    padding: 15px;
+    width: 88%;
+    color: #fff;
+    border-radius: 1px;
+    background-color: black;
+    transition: all .15s ease-in;
+    border: none;
+}
+
+.cart_right .order_box button:hover {
+    background-color: gray;
+}
